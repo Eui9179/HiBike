@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.roundG0929.hibike">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="hardware.camera2" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_main"
+        android:label="안녕자전거"
+        android:roundIcon="@mipmap/ic_main_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.HiBike"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activities.auth.MyDangerOne"
+            android:exported="false" />
+        <activity
+            android:name=".activities.auth.MyPostActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.riding_record.FullScreenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.information.InformationWriteActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activities.riding_record.RidingRecordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.riding_record.RidingRecordListActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="6xi4dmacb3" />
+
+        <activity
+            android:name=".activities.map_route.FindPathActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.map_route.SearchPlaceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.map_route.RidingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.auth.SignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.auth.BasicProfileActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Holo.Light.Dialog" />
+        <activity
+            android:name=".activities.auth.SigninActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.board.ListViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.board.ViewContentsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activities.board.ListViewReplyActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activities.board.WritePostActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="fcm.MyFirebaseMessagingService"
+            android:exported="false"
+            android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.roundG0929.hibike"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
+
+</manifest>
