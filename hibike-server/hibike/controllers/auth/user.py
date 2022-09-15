@@ -1,14 +1,15 @@
 from flask import request, session, jsonify, send_from_directory
 from flask_apispec import doc, use_kwargs
 from hibike.models.auth import User, UserRiding
-from hibike.models.redis_conn import RedisConn
 from hibike.controllers.auth import (
     API_CATEGORY,
     auth_bp,
     authorization_header
 )
 from hibike.schema.user import (
+    RequestTestSchema,
     RequestSetNicknameSchema,
+    RequestFileSchema,
 )
 from hibike.utils.common import (
     response_json_with_code,
@@ -18,11 +19,26 @@ import os
 
 path = os.path.abspath("./hibike/static/image/profile")
 
+@auth_bp.route('/test', methods=["POST"])
+@use_kwargs(RequestTestSchema)
+@doc(
+    tags=[API_CATEGORY],
+    summary="테스트용 api",
+    description="테스트용 api",
+    responses={200: {"description" : "success response"},
+               401: {"description" : "Unauthorized"},
+    }
+)
+def test_api(text):
+    return response_json_with_code(
+        result = text + ' from server'
+    )
+
 @auth_bp.route("/current-user", methods=["GET"])
 @doc(
     tags=[API_CATEGORY],
     summary="현재 로그인 한 유저의 정보",
-    description="access token으로 로그인한 유저의 간단한 정보 반환",
+    description="",
     params=authorization_header,
     response={
         200: {"description" : "success response"},
@@ -136,8 +152,9 @@ def upload():
 )
 def donwload(id):
     image = User.get_user_by_id(id).image
+    abspath = os.path.abspath(path)
+    
     if image:
-        abspath = os.path.abspath(path)
         return send_from_directory(abspath, image)
     else:
-        return response_json_with_code()
+        return send_from_directory(abspath, 'cyclist.png')

@@ -1,4 +1,3 @@
-from email.policy import default
 from hibike import db, app
 
 class Danger(db.Model):

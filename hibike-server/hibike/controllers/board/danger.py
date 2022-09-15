@@ -3,7 +3,6 @@ from flask_apispec import doc, use_kwargs
 from hibike import app, db
 from hibike.models.board import Board,Reply,Danger
 from hibike.models.auth import User, UserRiding
-from hibike.models.redis_conn import RedisConn
 from hibike.controllers.board import (
     API_CATEGORY,
     board_bp
@@ -16,11 +15,13 @@ from hibike.schema.user import (
     RequestDangerRangeSchema,
     RequestDangerInformationSchema,
     RequestDeleteDanger,
+    RequestMyDanger,
     RequestDeleteNearDanger,
     RequestDeleteMyDanger
 )
 import  os
 from datetime import datetime
+import time as t
 from pytz import timezone
 from haversine import haversine
 

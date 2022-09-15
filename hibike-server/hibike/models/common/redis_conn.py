@@ -2,7 +2,7 @@ from redis import Redis
 
 class RedisConn(Redis):
     def __init__(self):
-        super().__init__(host='localhost', port=6379, encoding='utf8', db=0, decode_responses=True)
+        super().__init__(host='redis_boot', port=6379, encoding='utf8', db=0, decode_responses=True)
 
     def __del__(self):
         super().close()

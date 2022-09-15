@@ -1,6 +1,6 @@
 from flask import request, send_from_directory
 from flask_apispec import doc, use_kwargs
-from hibike import app, db
+from hibike import db
 from hibike.models.riding import RidingEach, RidingTotal
 from hibike.controllers.auth import (
     API_CATEGORY,
@@ -15,7 +15,7 @@ from hibike.utils.common import (
 )
 from datetime import datetime
 from pytz import timezone
-import os, json
+import os
 
 path = os.path.abspath("./hibike/static/image/riding")
 
@@ -246,8 +246,12 @@ def rupload():
     filename = file.filename.split(".")
     new_filename = f"{unique_id}.{filename[1]}"
     
+    # row = RidingEach.get_one_by_unique_id(unique_id)
+    # if row:
+       
     full_path = os.path.join(path, new_filename)
     file.save(full_path)
+        # row.image = new_filename
         
     db.session.commit()
     return response_json_with_code()
@@ -260,7 +264,10 @@ def rupload():
     description="image download"
 )
 def rdonwload(unique_id):
+    # row = RidingEach.get_one_by_unique_id(unique_id)
+    # if row:
     row = RidingEach.get_one_by_unique_id(unique_id)
     abspath = os.path.abspath(path)
     return send_from_directory(abspath, row.image)
     
+    # return response_json_with_code()

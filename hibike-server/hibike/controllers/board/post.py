@@ -1,9 +1,8 @@
 from flask import request, session
 from flask_apispec import doc, use_kwargs
-from hibike import app, db
+from hibike import db
 from hibike.models.board import Board,Reply
 from hibike.models.auth import User, UserRiding
-from hibike.models.redis_conn import RedisConn
 from hibike.controllers.board import (
     API_CATEGORY,
     board_bp
