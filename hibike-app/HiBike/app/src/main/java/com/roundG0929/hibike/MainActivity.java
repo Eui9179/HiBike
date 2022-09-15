@@ -28,6 +28,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
 import com.airbnb.lottie.LottieAnimationView;
@@ -217,8 +218,8 @@ public class MainActivity extends AppCompatActivity {
 
             ivProfileImage = (ImageView) findViewById(R.id.iv_profile_image);
             imageApi = new ImageApi();
-            imageApi.setImageOnImageView(this, ivProfileImage, imageApi.getProfileImageUrl(id));
-
+            String imageUrl = imageApi.getProfileImageUrl(id);
+            imageApi.setImageOnImageView(this, ivProfileImage, imageUrl);
 
             postFrameLayout = findViewById(R.id.postFrameLayout);
             postFrameLayout.setOnClickListener(new View.OnClickListener() {
